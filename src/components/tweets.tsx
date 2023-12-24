@@ -62,12 +62,14 @@ export async function InitialTweetList() {
         {tweetData.map((tweet) => (
           <TweetCard {...tweet} />
         ))}
-        <div
-          hx-get={`/api/tweets?after=${lastTweetTime?.toISOString()}`}
-          hx-swap="beforeend"
-          hx-target="#tweetList"
-          hx-trigger="revealed"
-        />
+        {lastTweetTime && (
+          <div
+            hx-get={`/api/tweets?after=${lastTweetTime?.toISOString()}`}
+            hx-swap="beforeend"
+            hx-target="#tweetList"
+            hx-trigger="revealed"
+          />
+        )}
       </div>
     </>
   );

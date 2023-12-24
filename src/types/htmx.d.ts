@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 type RoutesByType<
   Schema extends Record<string, unknown>, // Ensure keys are strings
   Type extends "get" | "post" | "put" | "delete" | "patch",
@@ -19,17 +20,22 @@ type RemoveSlash<S extends string> = S extends `${infer T}/`
     : T
   : S;
 
-type RouterPattern<T extends string> = T extends `${infer Start}:/${infer Rest}`
-  ? `${Start}${string}/${RouterPattern<Rest>}`
-  : T extends `${infer Start}:`
-  ? `${Start}${string}`
-  : T extends `${infer Start}*`
-  ? `${Start}${string}`
+type RouterPattern<T extends string> =
+  T extends `${infer Start}:${infer Param}/${infer Rest}`
+    ? `${Start}${string}/${RouterPattern<Rest>}`
+    : T extends `${infer Start}:${infer Param}`
+    ? `${Start}${string}`
+    : T extends `${infer Start}*`
+    ? `${Start}${string}`
+    : T;
+
+type StartsWithApi<T extends string> = T extends `${"/api"}${infer Rest}`
+  ? T
+  : never;
+
+type DoesntStartWithApi<T extends string> = T extends `${"/api"}${infer Rest}`
+  ? never
   : T;
-
-type StartsWithApi<T extends string> = T extends `${"/api"}` ? T : never;
-
-type DoesntStartWithApi<T extends string> = T extends `${"/api"}` ? never : T;
 
 // eslint-disable-next-line @typescript-eslint/consistent-type-imports
 type Schema = import("../main").App["schema"];

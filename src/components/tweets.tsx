@@ -66,6 +66,7 @@ export async function InitialTweetList() {
           <TweetCard {...tweet} />
         ))}
         {lastTweetTime && (
+          // @ts-expect-error Not typed properly
           <div
             hx-get={`/api/tweets?after=${lastTweetTime?.toISOString()}`}
             hx-swap="beforeend"
@@ -100,6 +101,7 @@ export async function AdditionalTweetList({ after }: { after: Date }) {
         <TweetCard {...tweet} />
       ))}
       {lastTweetTime && (
+        // @ts-expect-error Not typed properly
         <div
           hx-get={`/api/tweets?after=${lastTweetTime.toISOString()}`}
           hx-swap="beforeend"

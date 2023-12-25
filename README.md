@@ -2,7 +2,7 @@
 
 ## To open an issue: <https://github.com/ethanniser/the-beth-stack>
 
-## To discuss: <https://discord.gg/Z3yUtMfkwa>
+## To see the deployed version: <https://beth-twitter.onrender.com/>
 
 ### To run locally
 

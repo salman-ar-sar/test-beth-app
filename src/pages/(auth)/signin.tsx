@@ -19,13 +19,13 @@ export const login = new Elysia()
     return ctx.html(() => (
       <BaseHtml>
         <div
-          class="flex h-screen w-full flex-col items-center justify-center bg-gray-200"
+          class="bg-dark flex flex-col items-center justify-center"
           hx-ext="response-targets"
         >
           <div class="p-4">
             <a
               href="/"
-              class="text-indigo-600 hover:text-indigo-800 hover:underline"
+              class="text-indigo-300 hover:text-indigo-500 hover:underline"
             >
               Go Home
             </a>
@@ -34,12 +34,12 @@ export const login = new Elysia()
             hx-post="/api/auth/signInOrUp"
             hx-swap="innerHTML"
             hx-target-4xx="#errorMessage"
-            class="w-96 rounded-lg bg-white p-8 shadow-md"
+            class="w-96 rounded-lg border p-8 shadow-md"
           >
             <div class="mb-4">
               <label
                 for="handle"
-                class="mb-2 block text-sm font-medium text-gray-600"
+                class="mb-2 block text-sm font-medium text-gray-200"
               >
                 Handle
               </label>
@@ -48,13 +48,13 @@ export const login = new Elysia()
                 name="handle"
                 id="handle"
                 placeholder="Enter your handle"
-                class="w-full rounded-md border p-2 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-indigo-400"
+                class="bg-dark w-full rounded-md border p-2 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-indigo-400"
               />
             </div>
             <div class="mb-4">
               <label
                 for="password"
-                class="mb-2 block text-sm font-medium text-gray-600"
+                class="mb-2 block text-sm font-medium text-gray-200"
               >
                 Password
               </label>
@@ -63,7 +63,7 @@ export const login = new Elysia()
                 name="password"
                 id="password"
                 placeholder="Enter your password"
-                class="w-full rounded-md border p-2 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-indigo-400"
+                class="bg-dark w-full rounded-md border p-2 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-indigo-400"
               />
             </div>
             <div class="flex flex-col gap-2">
@@ -86,7 +86,7 @@ export const login = new Elysia()
               <a
                 hx-boost="false"
                 href="/login/github"
-                class="display-block rounded-lg bg-gray-800 p-2 text-center text-white transition duration-200 hover:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-opacity-50"
+                class="flex items-center justify-center gap-4 rounded-lg bg-gray-400 p-2 text-center text-white transition duration-200 hover:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-opacity-50"
               >
                 Sign In with Github
                 <div class="i-logos-github-icon inline-block text-2xl" />

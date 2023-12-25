@@ -1,4 +1,4 @@
-FROM oven/bun
+FROM oven/bun as base
 
 WORKDIR /app
 
@@ -11,7 +11,7 @@ COPY src src
 COPY tsconfig.json .
 
 # Copy built application
-COPY --from=build /app /app
+COPY --from=base /app /app
 
 ENV NODE_ENV production
 

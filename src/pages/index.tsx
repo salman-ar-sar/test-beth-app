@@ -39,7 +39,7 @@ export const index = new Elysia()
               Sign In
             </a>
           )}
-          <InitialTweetList />
+          <InitialTweetList session={session} />
         </div>
       </BaseHtml>
     ));

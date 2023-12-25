@@ -16,10 +16,10 @@ export const tweetsController = new Elysia({
   })
   .get(
     "/",
-    async ({ query: { after } }) => {
+    async ({ query: { after }, session }) => {
       const date = new Date(after);
 
-      return <AdditionalTweetList after={date} />;
+      return <AdditionalTweetList after={date} session={session} />;
     },
     {
       query: t.Object({
@@ -56,6 +56,7 @@ export const tweetsController = new Elysia({
           createdAt={tweet.createdAt}
           author={{ handle: session.user.handle }}
           id={tweet.id}
+          session={session}
         />
       );
     },

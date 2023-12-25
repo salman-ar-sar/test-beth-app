@@ -1,18 +1,28 @@
+import { type Session } from "lucia";
 import { db } from "../db";
 
-export function TweetCard({
-  author: { handle },
-  createdAt,
-  content,
-  id,
-}: {
+interface TweetListProps {
+  session: Session | null;
+}
+
+interface TweetCardProps extends TweetListProps {
   createdAt: Date;
   content: string;
   author: {
     handle: string;
   };
   id: number;
-}) {
+}
+
+export function TweetCard({
+  author: { handle },
+  createdAt,
+  content,
+  id,
+  session,
+}: TweetCardProps) {
+  const canDeleteTweet = session?.user.handle === handle;
+
   return (
     <div
       class="rounded-lg border p-4 shadow-md"
@@ -27,21 +37,23 @@ export function TweetCard({
       </p>
       <div class="flex flex-row justify-between">
         <span class="text-sm text-gray-500">{createdAt.toLocaleString()}</span>
-        <button
-          class="i-lucide-x text-lg text-red-500"
-          hx-delete={`/api/tweets/${id}`}
-          hx-target={`#tweet-${id}`}
-          hx-swap="outerHTML"
-          hx-target-4xx="next #tweetDeleteError"
-          hx-confirm="Are you sure you want to delete this tweet?"
-        />
+        {canDeleteTweet && (
+          <button
+            class="i-lucide-x text-lg text-red-500"
+            hx-delete={`/api/tweets/${id}`}
+            hx-target={`#tweet-${id}`}
+            hx-swap="outerHTML"
+            hx-target-4xx="next #tweetDeleteError"
+            hx-confirm="Are you sure you want to delete this tweet?"
+          />
+        )}
       </div>
       <div id="tweetDeleteError" />
     </div>
   );
 }
 
-export async function InitialTweetList() {
+export async function InitialTweetList({ session }: TweetListProps) {
   const tweetData = await db.query.tweets.findMany({
     limit: 5,
     orderBy: (tweets, { desc }) => [desc(tweets.createdAt)],
@@ -63,7 +75,7 @@ export async function InitialTweetList() {
         id="tweetList"
       >
         {tweetData.map((tweet) => (
-          <TweetCard {...tweet} />
+          <TweetCard {...tweet} session={session} />
         ))}
         {lastTweetTime && (
           // @ts-expect-error Not typed properly
@@ -80,7 +92,14 @@ export async function InitialTweetList() {
   );
 }
 
-export async function AdditionalTweetList({ after }: { after: Date }) {
+interface AdditionalTweetListProps extends TweetListProps {
+  after: Date;
+}
+
+export async function AdditionalTweetList({
+  after,
+  session,
+}: AdditionalTweetListProps) {
   const tweetData = await db.query.tweets.findMany({
     where: (tweets, { lt }) => lt(tweets.createdAt, after),
     limit: 5,
@@ -99,7 +118,7 @@ export async function AdditionalTweetList({ after }: { after: Date }) {
   return (
     <>
       {tweetData.map((tweet) => (
-        <TweetCard {...tweet} />
+        <TweetCard {...tweet} session={session} />
       ))}
       {lastTweetTime && (
         // @ts-expect-error Not typed properly

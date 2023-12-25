@@ -68,6 +68,7 @@ export async function InitialTweetList() {
         {lastTweetTime && (
           // @ts-expect-error Not typed properly
           <div
+            class="hidden"
             hx-get={`/api/tweets?after=${lastTweetTime?.toISOString()}`}
             hx-swap="beforeend"
             hx-target="#tweetList"
@@ -103,6 +104,7 @@ export async function AdditionalTweetList({ after }: { after: Date }) {
       {lastTweetTime && (
         // @ts-expect-error Not typed properly
         <div
+          class="hidden"
           hx-get={`/api/tweets?after=${lastTweetTime.toISOString()}`}
           hx-swap="beforeend"
           hx-target="#tweetList"

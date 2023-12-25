@@ -83,14 +83,16 @@ export const login = new Elysia()
               >
                 Sign Up
               </button>
-              <a
-                hx-boost="false"
-                href="/login/github"
-                class="flex items-center justify-center gap-4 rounded-lg bg-gray-400 p-2 text-center text-white transition duration-200 hover:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-opacity-50"
-              >
-                Sign In with Github
-                <div class="i-logos-github-icon inline-block text-2xl" />
-              </a>
+              {false && (
+                <a
+                  hx-boost="false"
+                  href="/login/github"
+                  class="flex items-center justify-center gap-4 rounded-lg bg-gray-400 p-2 text-center text-white transition duration-200 hover:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-opacity-50"
+                >
+                  Sign In with Github
+                  <div class="i-logos-github-icon inline-block text-2xl" />
+                </a>
+              )}
             </div>
             <div id="errorMessage" class="pt-4 text-red-500"></div>
           </form>

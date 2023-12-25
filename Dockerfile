@@ -1,17 +1,34 @@
-FROM oven/bun
+# Adjust BUN_VERSION as desired
+ARG BUN_VERSION=1.0.20
+FROM oven/bun:${BUN_VERSION} as base
 
+# Bun app lives here
 WORKDIR /app
 
-COPY package.json .
-COPY bun.lockb .
+# Set production environment
+ENV NODE_ENV="production"
 
-RUN bun install --production
 
-COPY src src
-COPY tsconfig.json .
+# Throw-away build stage to reduce size of final image
+FROM base as build
 
-ENV NODE_ENV production
+# Install packages needed to build node modules
+# RUN apt-get update -qq && \
+#     apt-get install -y build-essential pkg-config python-is-python3
 
-CMD [ "bun", "run", "start" ]
+# Install node modules
+COPY --link bun.lockb package.json ./
+RUN bun install --ci
 
+# Copy application code
+COPY --link . .
+
+# Final stage for app image
+FROM base
+
+# Copy built application
+COPY --from=build /app /app
+
+# Start the server by default, this can be overwritten at runtime
 EXPOSE 3000
+CMD [ "bun", "run", "start" ]

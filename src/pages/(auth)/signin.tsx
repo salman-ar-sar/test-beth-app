@@ -48,7 +48,7 @@ export const login = new Elysia()
                 name="handle"
                 id="handle"
                 placeholder="Enter your handle"
-                class="bg-dark w-full rounded-md border p-2 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-indigo-400"
+                class="bg-dark w-full rounded-md border p-2 text-gray-200 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-indigo-400"
               />
             </div>
             <div class="mb-4">
@@ -63,7 +63,7 @@ export const login = new Elysia()
                 name="password"
                 id="password"
                 placeholder="Enter your password"
-                class="bg-dark w-full rounded-md border p-2 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-indigo-400"
+                class="bg-dark w-full rounded-md border p-2 text-gray-200 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-indigo-400"
               />
             </div>
             <div class="flex flex-col gap-2">

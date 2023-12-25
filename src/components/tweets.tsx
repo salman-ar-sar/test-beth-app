@@ -58,7 +58,10 @@ export async function InitialTweetList() {
 
   return (
     <>
-      <div class="space-y-4" id="tweetList">
+      <div
+        class="my-6 grid gap-4 p-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5"
+        id="tweetList"
+      >
         {tweetData.map((tweet) => (
           <TweetCard {...tweet} />
         ))}
@@ -113,16 +116,17 @@ export function TweetCreationForm() {
     <div class="rounded-lg border p-4 shadow-md">
       <h2 class="mb-4 text-xl font-bold">Create a new Tweet</h2>
       <form
+        class="flex flex-col items-center gap-3"
         hx-post="/api/tweets"
         hx-swap="afterbegin"
         hx-target="#tweetList"
         _="on submit target.reset()"
       >
-        <label class="mb-2 block text-sm font-bold" for="content">
+        <label class="block self-start text-sm font-bold" for="content">
           Tweet:
         </label>
         <input
-          class="w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 shadow"
+          class="w-72 appearance-none rounded border px-3 py-2 leading-tight text-gray-700 shadow"
           name="content"
           required="true"
         />

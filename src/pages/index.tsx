@@ -18,7 +18,7 @@ export const index = new Elysia()
           {session ? (
             <>
               <div class="my-4 flex items-center gap-4">
-                <h1 class="text-2xl font-bold text-gray-800" safe>
+                <h1 class="text-2xl font-bold text-gray-200" safe>
                   Hi! {session.user.handle}
                 </h1>
                 <button

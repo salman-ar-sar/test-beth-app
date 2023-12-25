@@ -19,10 +19,10 @@ export function TweetCard({
       id={`tweet-${id}`}
       hx-ext="response-targets"
     >
-      <h2 class="text-xl font-bold" safe>
+      <h2 class="text-xl font-bold text-white" safe>
         @{handle}
       </h2>
-      <p class="text-gray-700" safe>
+      <p class="text-cyan-100" safe>
         {content}
       </p>
       <div class="flex flex-row justify-between">
@@ -116,7 +116,7 @@ export async function AdditionalTweetList({ after }: { after: Date }) {
 export function TweetCreationForm() {
   return (
     <div class="rounded-lg border p-4 shadow-md">
-      <h2 class="mb-4 text-xl font-bold">Create a new Tweet</h2>
+      <h2 class="mb-4 text-xl font-bold text-white">Create a new Tweet</h2>
       <form
         class="flex flex-col items-center gap-3"
         hx-post="/api/tweets"
@@ -124,11 +124,14 @@ export function TweetCreationForm() {
         hx-target="#tweetList"
         _="on submit target.reset()"
       >
-        <label class="block self-start text-sm font-bold" for="content">
+        <label
+          class="block self-start text-sm font-bold text-cyan-100"
+          for="content"
+        >
           Tweet:
         </label>
         <input
-          class="w-72 appearance-none rounded border px-3 py-2 leading-tight text-gray-700 shadow"
+          class="bg-dark w-72 appearance-none rounded border px-3 py-2 leading-tight text-gray-200 shadow"
           name="content"
           required="true"
         />
